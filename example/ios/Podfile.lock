@@ -4,18 +4,18 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - Flutter (from `.symlinks/flutter/ios-release`)
+  - Flutter (from `.symlinks/flutter/ios`)
   - flutter_apple_pay_oc (from `.symlinks/plugins/flutter_apple_pay_oc/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
-    :path: ".symlinks/flutter/ios-release"
+    :path: ".symlinks/flutter/ios"
   flutter_apple_pay_oc:
     :path: ".symlinks/plugins/flutter_apple_pay_oc/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_apple_pay_oc: 97e2fda12e9e7cb5cca964873535305517d1fd38
+  flutter_apple_pay_oc: 2ff7b9f3856e5e1bc0d92aab1ab04302793c916e
 
 PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
 

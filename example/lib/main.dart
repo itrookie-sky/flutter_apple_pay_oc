@@ -40,15 +40,63 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Widget _createRow(String lab, Function func) {
+    return Container(
+      margin: EdgeInsets.only(top: 20.0),
+      width: 300,
+      height: 70,
+      color: Colors.blue,
+      child: FlatButton(
+        onPressed: func,
+        child: Text(
+          lab,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 44.0,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('apple_pay'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              '接口测试',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 44.0,
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  _createRow('test', () {
+                    FlutterApplePayOc.test();
+                  }),
+                  _createRow('testApplePay', () async {
+                    var result = await FlutterApplePayOc.appStorePay(
+                        "orderid", 1, "com.baidu.www");
+                    print(result);
+                  }),
+                  _createRow('testMerchantsPay', () async {
+                    var result = await FlutterApplePayOc.merchantsPay(
+                        "orderid", "merchatId");
+                    print(result);
+                  }),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

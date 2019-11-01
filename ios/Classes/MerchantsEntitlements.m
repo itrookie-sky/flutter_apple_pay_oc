@@ -1,11 +1,3 @@
-//
-//  MerchantsEntitlements.m
-//  Egret_iOS_AppStore
-//
-//  Created by LuXianli on 2019/7/9.
-//  Copyright © 2019 LuXianli. All rights reserved.
-//
-
 #import "MerchantsEntitlements.h"
 
 static MerchantsEntitlements *merchants_entitlements = nil;
@@ -82,7 +74,7 @@ static MerchantsEntitlements *merchants_entitlements = nil;
 
 #pragma mark - 生成订单-下单
 // 创建订单并且发送到苹果 
--(void)createOrderAndSendToApple:(NSString *)orderInfo{
+-(void)createOrderAndSendToApple:(NSString *)orderInfo merchatId:(NSString *)merchatId{
     
     NSData *data = [orderInfo dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
@@ -91,12 +83,12 @@ static MerchantsEntitlements *merchants_entitlements = nil;
     int num = order_price.intValue;
     order_price =[[NSString alloc] initWithFormat:@"%d",num];
 //    NSString *order_name = [jsonDic objectForKey:@"name"];
-    NSString *order_name = @"钻石";
+    NSString *order_name = [jsonDic objectForKey:@"order_name"];
     NSString *order_orderNo = [jsonDic objectForKey:@"orderid"];
     
     PKPaymentRequest *request = [[PKPaymentRequest alloc] init];
     
-    request.merchantIdentifier = @"merchant.com.luxianli.mahjong";
+    request.merchantIdentifier = merchatId;
     request.countryCode = @"CN";
     request.currencyCode = @"CNY";
     

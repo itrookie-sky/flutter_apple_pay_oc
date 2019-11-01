@@ -1,11 +1,3 @@
-//
-//  AppStoreInternalPurchase.h
-//  Egret_iOS_AppStore
-//
-//  Created by LuXianli on 2019/7/12.
-//  Copyright © 2019 LuXianli. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import <StoreKit/StoreKit.h>
 

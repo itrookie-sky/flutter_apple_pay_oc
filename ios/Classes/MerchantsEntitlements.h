@@ -1,11 +1,3 @@
-//
-//  MerchantsEntitlements.h
-//  Egret_iOS_AppStore
-//
-//  Created by LuXianli on 2019/7/9.
-//  Copyright © 2019 LuXianli. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import <PassKit/PassKit.h>
 #import <PassKit/PKPaymentAuthorizationViewController.h>
@@ -37,5 +29,5 @@
  创建订单并且发送到苹果
  @param orderInfo 订单信息 json格式
  */
--(void)createOrderAndSendToApple:(NSString *)orderInfo;
+-(void)createOrderAndSendToApple:(NSString *)orderInfo merchatId:(NSString *)merchatId;
 @end
