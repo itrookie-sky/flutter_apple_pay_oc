@@ -160,7 +160,10 @@ static MerchantsEntitlements *merchants_entitlements = nil;
 //支付完成回调
 - (void)paymentAuthorizationViewControllerDidFinish:(nonnull PKPaymentAuthorizationViewController *)controller {
     
-    [controller dismissViewControllerAnimated:YES completion:nil];
+    [controller dismissViewControllerAnimated:YES completion:^void() {
+        self.view.frame = CGRectMake(0, 0, 0, 0);
+        [self removeFromParentViewController];
+    }];
     
     NSLog(@"支付完成");
 }

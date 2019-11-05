@@ -66,37 +66,40 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('apple_pay'),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '接口测试',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 44.0,
+        body: Container(
+          decoration: BoxDecoration(color: Colors.grey[200]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                '接口测试',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 44.0,
+                ),
               ),
-            ),
-            Expanded(
-              child: ListView(
-                children: <Widget>[
-                  _createRow('test', () {
-                    FlutterApplePayOc.test();
-                  }),
-                  _createRow('testApplePay', () async {
-                    var result = await FlutterApplePayOc.appStorePay(
-                        "orderid", 1, "com.baidu.www");
-                    print(result);
-                  }),
-                  _createRow('testMerchantsPay', () async {
-                    var result = await FlutterApplePayOc.merchantsPay(
-                        "orderid", "merchatId");
-                    print(result);
-                  }),
-                ],
+              Expanded(
+                child: ListView(
+                  children: <Widget>[
+                    _createRow('test', () {
+                      FlutterApplePayOc.test();
+                    }),
+                    _createRow('testApplePay', () async {
+                      var result = await FlutterApplePayOc.appStorePay(
+                          "orderid", 1, "com.baidu.www");
+                      print(result);
+                    }),
+                    _createRow('testMerchantsPay', () async {
+                      var result = await FlutterApplePayOc.merchantsPay(
+                          "orderid", "merchatId", 0.01, "商品");
+                      print(result);
+                    }),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

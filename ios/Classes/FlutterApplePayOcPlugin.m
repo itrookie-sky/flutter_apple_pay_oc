@@ -56,7 +56,7 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
 //内购
 - (void)appStorePay:(FlutterMethodCall*)call result:(FlutterResult)result{
     NSString *orderInfo = call.arguments;
-    ViewController * view_controller = [ViewController getInstance];
+    ViewController *view_controller = [ViewController getInstance];
     [view_controller showMBHUDColor:@"开始内购支付"];
         
     NSData *data = [orderInfo dataUsingEncoding:NSUTF8StringEncoding];
@@ -142,7 +142,6 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
        NSString *merchatId = [json objectForKey:@"merchatid"];
        
        UIViewController *viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-       
        MerchantsEntitlements *merchantsViewController = [MerchantsEntitlements getInstance];
        [viewController addChildViewController:merchantsViewController];
        merchantsViewController.view.frame = [[UIScreen mainScreen] bounds];
@@ -189,7 +188,6 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
            NSString *json = [[NSString alloc] initWithBytes:data.bytes length:data.length encoding:NSUTF8StringEncoding];
            
            result(json);
-           
            return YES;
        }];
 }
