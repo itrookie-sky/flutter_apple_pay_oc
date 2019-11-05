@@ -80,7 +80,7 @@ static MerchantsEntitlements *merchants_entitlements = nil;
     NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
     NSString *order_price = [jsonDic objectForKey:@"price"];
-    double num = order_price.intValue;
+    double num = order_price.doubleValue;
     order_price =[[NSString alloc] initWithFormat:@"%d",num];
 //    NSString *order_name = [jsonDic objectForKey:@"name"];
     NSString *order_name = [jsonDic objectForKey:@"order_name"];
