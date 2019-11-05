@@ -27,7 +27,7 @@ class FlutterApplePayOc {
 
   //商户收款
   static Future<MerchatsOrderResult> merchantsPay(
-      String orderid, String merchatId, int price, String order_name) async {
+      String orderid, String merchatId, num price, String order_name) async {
     Map<String, dynamic> info = {
       "orderid": orderid,
       "merchatid": merchatId,
@@ -43,7 +43,7 @@ class FlutterApplePayOc {
 
   //内购商品
   static Future<AppStoreInternalPurchaseResult> appStorePay(
-      String orderid, int price, String productId) async {
+      String orderid, num price, String productId) async {
     Map<String, dynamic> info = {
       "orderid": orderid,
       "price": price,
