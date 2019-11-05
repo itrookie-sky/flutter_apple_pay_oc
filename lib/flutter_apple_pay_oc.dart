@@ -27,10 +27,12 @@ class FlutterApplePayOc {
 
   //商户收款
   static Future<MerchatsOrderResult> merchantsPay(
-      String orderid, String merchatId) async {
+      String orderid, String merchatId, int price, String order_name) async {
     Map<String, dynamic> info = {
       "orderid": orderid,
       "merchatid": merchatId,
+      "price": price,
+      "order_name": order_name,
     };
     final String result =
         await _channel.invokeMethod(MerchantsEntitlements, json.encode(info));
