@@ -67,8 +67,12 @@ class MerchatsOrderResult {
     this.orderid,
     this.token,
   }) {
-    assert(orderid != null, "orderid Can't be empty");
-    assert(token != null, "token Can't be empty");
+    if (orderid == null) {
+      print("MerchatsOrderResult orderid is empty");
+    }
+    if (token == null) {
+      print("MerchatsOrderResult token is empty");
+    }
   }
 }
 
@@ -80,7 +84,11 @@ class AppStoreInternalPurchaseResult {
   String receipt_data;
 
   AppStoreInternalPurchaseResult({this.orderid, this.receipt_data}) {
-    assert(orderid != null, "orderid Can't be empty");
-    assert(receipt_data != null, "receipt_data Can't be empty");
+    if (orderid == null) {
+      print("AppStoreInternalPurchaseResult orderid is empty");
+    }
+    if (receipt_data == null) {
+      print("AppStoreInternalPurchaseResult receipt_data is empty");
+    }
   }
 }
