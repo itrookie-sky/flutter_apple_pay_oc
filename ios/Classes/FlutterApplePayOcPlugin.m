@@ -102,8 +102,6 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
                                       };
           NSData *verifyData = [NSJSONSerialization dataWithJSONObject:verifyDic options:kNilOptions error:nil];
           NSString *verifyString = [[NSString alloc] initWithBytes:verifyData.bytes length:verifyData.length encoding:NSUTF8StringEncoding];
-          
-          result(verifyString);
         });
 //         [view_controller showMBHUDMessage:errorMessage];
 //         [view_controller hideMBHUDProgress];
@@ -124,7 +122,6 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
                     [view_controller showMBHUDColor:message];
                     sleep(1);
                     [view_controller hideMBHUDProgress];
-                    result(verifyString);
                 });
 //                [view_controller showMBHUDColor:message];
 //                [view_controller hideMBHUDProgress];
@@ -133,7 +130,6 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
                 dispatch_async(dispatch_get_main_queue(), ^{
                     sleep(1);
                     [view_controller hideMBHUDProgress];
-                    result(verifyString);
                 });
 //                [view_controller hideMBHUDProgress];
             }
