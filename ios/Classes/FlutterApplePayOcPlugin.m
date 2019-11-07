@@ -90,30 +90,52 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
     }];
         
     [appStoreInternalPurchase setHandleApplePayPamentPurchaseErrorTips:^(NSString *errorMessage) {
-            
-    //        dispatch_async(dispatch_get_main_queue(), ^{
-    //            [SVProgressHUD showErrorWithStatus:errorMessage];
-    //        });
-            
-            [view_controller showMBHUDMessage:errorMessage];
-            [view_controller hideMBHUDProgress];
-            
+        NSLog(@"错误信息：%@",errorMessage);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [view_controller showMBHUDMessage:errorMessage];
+          sleep(1);
+          [view_controller hideMBHUDProgress];
+          NSDictionary *verifyDic = @{
+                                      @"orderid":@"",
+                                      @"receipt-data":@""
+//                                        @"pixu_type":@"appleStore"
+                                      };
+          NSData *verifyData = [NSJSONSerialization dataWithJSONObject:verifyDic options:kNilOptions error:nil];
+          NSString *verifyString = [[NSString alloc] initWithBytes:verifyData.bytes length:verifyData.length encoding:NSUTF8StringEncoding];
+          
+          result(verifyString);
+        });
+//         [view_controller showMBHUDMessage:errorMessage];
+//         [view_controller hideMBHUDProgress];
     }];
         
     [appStoreInternalPurchase setHandleApplePayPamentOurchaseMessageTips:^(NSString *message) {
-            
+            NSLog(@"购买结果信息：%@",message);
+            NSDictionary *verifyDic = @{
+                                          @"orderid":@"",
+                                          @"receipt-data":@""
+    //                                        @"pixu_type":@"appleStore"
+                                          };
+            NSData *verifyData = [NSJSONSerialization dataWithJSONObject:verifyDic options:kNilOptions error:nil];
+            NSString *verifyString = [[NSString alloc] initWithBytes:verifyData.bytes length:verifyData.length encoding:NSUTF8StringEncoding];
             if(message){
-                
-    //            dispatch_async(dispatch_get_main_queue(), ^{
-    //                [SVProgressHUD showWithStatus:message];
-    //            });
-                [view_controller showMBHUDColor:message];
+//                [SVProgressHUD showWithStatus:message];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [view_controller showMBHUDColor:message];
+                    sleep(1);
+                    [view_controller hideMBHUDProgress];
+                    result(verifyString);
+                });
+//                [view_controller showMBHUDColor:message];
+//                [view_controller hideMBHUDProgress];
             }else{
-                
-    //            dispatch_async(dispatch_get_main_queue(), ^{
-    //                [SVProgressHUD dismiss];
-    //            });
-                [view_controller hideMBHUDProgress];
+//                    [SVProgressHUD dismiss];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    sleep(1);
+                    [view_controller hideMBHUDProgress];
+                    result(verifyString);
+                });
+//                [view_controller hideMBHUDProgress];
             }
     }];
 }

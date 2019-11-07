@@ -218,7 +218,7 @@
 
 -(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
     NSLog(@"Transactions执行完成");
-    self.view.frame = CGRectMake(0, 0, 0, 0);
+//    self.view.frame = CGRectMake(0, 0, 0, 0);
 }
 
 -(void)dealloc{

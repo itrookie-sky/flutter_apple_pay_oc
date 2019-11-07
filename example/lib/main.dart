@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
                     }),
                     _createRow('testApplePay', () async {
                       var result = await FlutterApplePayOc.appStorePay(
-                          "orderid", 1, "com.baidu.www");
+                          "orderid", 1, "128");
                       print(result);
                     }),
                     _createRow('testMerchantsPay', () async {
