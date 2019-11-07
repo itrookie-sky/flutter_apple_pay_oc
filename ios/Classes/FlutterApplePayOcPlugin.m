@@ -120,12 +120,15 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
 //                [SVProgressHUD showWithStatus:message];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [view_controller showMBHUDColor:message];
+                    sleep(1);
+                    [view_controller hideMBHUDProgress];
                 });
 //                [view_controller showMBHUDColor:message];
 //                [view_controller hideMBHUDProgress];
             }else{
 //                    [SVProgressHUD dismiss];
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    sleep(1);
                     [view_controller hideMBHUDProgress];
                 });
 //                [view_controller hideMBHUDProgress];
