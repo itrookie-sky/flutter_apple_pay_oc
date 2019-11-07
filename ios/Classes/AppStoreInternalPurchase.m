@@ -97,7 +97,7 @@
             buyProduct = product;
         }
     }
-    
+    NSLog(@"即将购买内购商品:%@",buyProduct);
     SKPayment *payment = [SKPayment paymentWithProduct:buyProduct];
     
     NSLog(@"发起内购购买请求");
