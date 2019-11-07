@@ -79,7 +79,7 @@
         return;
     }
     
-    NSLog(@"内购产品ID：%@",response.invalidProductIdentifiers);
+    NSLog(@"内购产品ID：%@",self.currentProductID);
     NSLog(@"内购可付费产品数量：%lu",(unsigned long)[productArray count]);
     
     SKProduct *buyProduct = nil;
