@@ -86,11 +86,11 @@
     
     for(SKProduct *product in productArray){
         
-        NSLog(@"%@",product.description);
-        NSLog(@"%@",product.localizedTitle);
-        NSLog(@"%@",product.localizedDescription);
-        NSLog(@"%@",product.price);
-        NSLog(@"%@",product.productIdentifier);
+        NSLog(@"description:%@",product.description);
+        NSLog(@"localizedTitle:%@",product.localizedTitle);
+        NSLog(@"localizedDescription:%@",product.localizedDescription);
+        NSLog(@"price:%@",product.price);
+        NSLog(@"productIdentifier:%@",product.productIdentifier);
         
         if([product.productIdentifier isEqualToString:self.currentProductID]){
             
