@@ -39,18 +39,18 @@ static ViewController *view_controller = nil;
 
 //默认支持d方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//        return UIInterfaceOrientationMaskAllButUpsideDown;
-//    } else {
-//        return UIInterfaceOrientationMaskAll;
-//    }
+    //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    //        return UIInterfaceOrientationMaskAllButUpsideDown;
+    //    } else {
+    //        return UIInterfaceOrientationMaskAll;
+    //    }
     
     return UIInterfaceOrientationMaskLandscape;
 }
 
 //优先显示方向
 -(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
-
+    
     return UIInterfaceOrientationLandscapeRight|UIInterfaceOrientationLandscapeLeft;
 }
 
@@ -63,13 +63,13 @@ static ViewController *view_controller = nil;
     UIView *view =[UIApplication sharedApplication].keyWindow.rootViewController.view;
     
     dispatch_async(dispatch_get_main_queue(),^{
-       if(!mbProgressHUD){
-           mbProgressHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
-           mbProgressHUD.contentColor = [UIColor colorWithRed:0.f green:0.6f blue:0.7f alpha:1.f];
-           
-       }
-      
-       mbProgressHUD.label.text = NSLocalizedString(loadTitle, @"HUD loading title");
+        if(!mbProgressHUD){
+            mbProgressHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+            mbProgressHUD.contentColor = [UIColor colorWithRed:0.f green:0.6f blue:0.7f alpha:1.f];
+            
+        }
+        
+        mbProgressHUD.label.text = NSLocalizedString(loadTitle, @"HUD loading title");
     });
 }
 
@@ -91,14 +91,14 @@ static ViewController *view_controller = nil;
 
 -(void)hideMBHUDProgress{
     if(mbProgressHUD){
-//        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self->mbProgressHUD hideAnimated:YES];
-                self->mbProgressHUD = nil;
-            });
-//        });
-//        [mbProgressHUD hideAnimated:YES];
-//        mbProgressHUD = nil;
+        //        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self->mbProgressHUD hideAnimated:YES];
+            self->mbProgressHUD = nil;
+        });
+        //        });
+        //        [mbProgressHUD hideAnimated:YES];
+        //        mbProgressHUD = nil;
     }
 }
 

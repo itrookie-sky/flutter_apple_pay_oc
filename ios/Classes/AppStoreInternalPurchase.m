@@ -4,7 +4,7 @@
 
 
 -(void)viewDidLoad{
-
+    
     [super viewDidLoad];
     
     [self createAppStoreInternalPurchase];
@@ -138,7 +138,7 @@
     }
     
     //应用本身验证
-//    [self appVerifyPurchase:base64];
+    //    [self appVerifyPurchase:base64];
 }
 
 #define SANDBOX_URL @"https://sandbox.itunes.apple.com/verifyReceipt"
@@ -147,8 +147,8 @@
 -(void)appVerifyPurchase:(NSString *)receiptBase64String{
     
     NSDictionary *requestDic = @{
-                                 @"receipt-data":receiptBase64String
-                                 };
+        @"receipt-data":receiptBase64String
+    };
     NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestDic options:kNilOptions error:nil];
     
     NSString *requestBody = [[NSString alloc] initWithBytes:requestData.bytes length:requestData.length encoding:NSUTF8StringEncoding];
@@ -183,8 +183,8 @@
          */
         
         switch (skPaymentTransaction.transactionState) {
-            
-            //支付成功
+                
+                //支付成功
             case SKPaymentTransactionStatePurchased:
                 NSLog(@"商品购买成功");
                 [self verifyPurchaseWithPaymentTransaction];
@@ -218,7 +218,7 @@
 
 -(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
     NSLog(@"Transactions执行完成");
-//    self.view.frame = CGRectMake(0, 0, 0, 0);
+    //    self.view.frame = CGRectMake(0, 0, 0, 0);
 }
 
 -(void)dealloc{
