@@ -1,6 +1,5 @@
 #import "FlutterApplePayOcPlugin.h"
 #import "AppStoreInternalPurchase.h"
-#import "MerchantsEntitlements.h"
 #import "ViewController.h"
 
 static NSString * const APPSTORE_INTERNAL_PURCHASE = @"AppStoreInternalPurchase";
@@ -33,7 +32,6 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
         //      [self appStorePayTest:call result:result];
     } else if([MERCHANTS_ENTITLEMENTS isEqualToString:call.method]) {
         //商户收款
-        [self merchantsPay:call result:result];
         //       [self merchantsPayTest:call result:result];
     }else{
         result(FlutterMethodNotImplemented);
@@ -147,66 +145,5 @@ static NSString * const MERCHANTS_ENTITLEMENTS = @"MerchantsEntitlements";
     NSData *data = [NSJSONSerialization dataWithJSONObject:jsondic options:kNilOptions error:nil];
     NSString *json = [[NSString alloc] initWithBytes:data.bytes length:data.length encoding:NSUTF8StringEncoding];
     result(json);
-}
-
-//商户收款
-- (void)merchantsPay:(FlutterMethodCall*)call result:(FlutterResult)result{
-    NSString *message = call.arguments;
-    
-    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    NSString *orderid = [json objectForKey:@"orderid"];
-    //商号
-    NSString *merchatId = [json objectForKey:@"merchatid"];
-    
-    UIViewController *viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    MerchantsEntitlements *merchantsViewController = [MerchantsEntitlements getInstance];
-    [viewController addChildViewController:merchantsViewController];
-    merchantsViewController.view.frame = [[UIScreen mainScreen] bounds];
-    [viewController.view addSubview:merchantsViewController.view];
-    
-    [[MerchantsEntitlements getInstance] initMerchantsEntitlements];
-    
-    [[MerchantsEntitlements getInstance] createOrderAndSendToApple:message merchatId:merchatId];
-    
-    [[MerchantsEntitlements getInstance] setHandleApplePayAuthorizePayment:^BOOL(PKPayment *payment) {
-        
-        NSDictionary *jsondic;
-        if(payment){
-            
-            PKPaymentToken *token = payment.token;
-            NSLog(@"h支付完成开始验证token信息：%@",token);
-            
-            PKPaymentMethod *method = token.paymentMethod;
-            NSLog(@"PKPaymentMethod==%@",method);
-            
-            NSData *paymentdata = token.paymentData;
-            NSString *paymentDataJson = [[NSString alloc] initWithBytes:paymentdata.bytes length:paymentdata.length encoding:NSUTF8StringEncoding];
-            
-            NSLog(@"h支付完成开始验证paymentdata信息：%@",paymentDataJson);
-            
-            NSString *paymentDataBase64 = [paymentdata base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-            paymentDataBase64 = [paymentDataBase64 stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-            paymentDataBase64 = [paymentDataBase64 stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-            paymentDataBase64 = [paymentDataBase64 stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-            
-            jsondic = @{
-                @"orderid":orderid,
-                @"token":paymentDataBase64
-                //                                     @"pixu_type":@"applePay"
-            };
-        }else{
-            jsondic = @{
-                @"orderid":orderid,
-                @"token":@""
-                //                           @"pixu_type":@"applePay"
-            };
-        }
-        NSData *data = [NSJSONSerialization dataWithJSONObject:jsondic options:kNilOptions error:nil];
-        NSString *json = [[NSString alloc] initWithBytes:data.bytes length:data.length encoding:NSUTF8StringEncoding];
-        
-        result(json);
-        return YES;
-    }];
 }
 @end
